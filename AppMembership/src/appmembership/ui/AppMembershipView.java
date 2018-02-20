@@ -85,6 +85,14 @@ public class AppMembershipView {
         io.readString("Student successfully removed.  Please hit enter to continue.");
     }
     
+    public void displayExitBanner() {
+        io.print("Good Bye!!!");
+    }
+    
+    public void displayUnknownCommandBanner() {
+        io.print("Unknown Command!!!");
+    }
+    
     public String getMemberIdChoice() {
         return io.readString("Please Enter the Member ID.");
     }

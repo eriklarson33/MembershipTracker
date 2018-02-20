@@ -14,7 +14,11 @@ import java.util.List;
  */
 public class AppMembershipView {
     
-    private UserIO io = new UserIOConsoleImpl();
+    private UserIO io;
+    
+    public AppMembershipView(UserIO io) {
+        this.io = io;
+    }
     
     public int printMenuAndGetSelection() {
         io.print("Main Menu");

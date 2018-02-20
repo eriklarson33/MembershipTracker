@@ -19,8 +19,22 @@ import java.util.List;
  */
 public class AppMembershipController {
     
-    AppMembershipView view = new AppMembershipView();
-    AppMembershipDao dao = new AppMembershipDaoImpl();
+    /* Declarations of member fields for Dependency Injection: */
+    AppMembershipView view;
+    AppMembershipDao dao;
+    
+    /* 
+    Create a constructor for the class to use Constructor Injection for DI 
+    */
+    /* 
+    Creating this constructor makes it so that the Controller isn't 
+    responsible for injecting the correct implementation of the view or dao.
+    */
+    public AppMembershipController(AppMembershipView view, AppMembershipDao dao) {
+        this.view = view;
+        this.dao = dao;
+    }
+    
     private UserIO io = new UserIOConsoleImpl();
     
     public void run() {

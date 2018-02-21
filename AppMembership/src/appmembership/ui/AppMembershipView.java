@@ -101,4 +101,8 @@ public class AppMembershipView {
         return io.readString("Please Enter the Member ID.");
     }
     
+    public void displayErrorMessage(String errorMsg) {
+        io.print("=== ERROR ===");
+        io.print(errorMsg);
+    }
 }

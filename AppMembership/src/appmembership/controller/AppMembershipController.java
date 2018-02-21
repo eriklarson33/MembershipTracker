@@ -6,6 +6,7 @@
 package appmembership.controller;
 
 import appmembership.dao.AppMembershipDao;
+import appmembership.dao.AppMembershipDaoException;
 import appmembership.dao.AppMembershipDaoImpl;
 import appmembership.dto.Member;
 import appmembership.ui.AppMembershipView;
@@ -40,6 +41,7 @@ public class AppMembershipController {
     public void run() {
         boolean keepGoing = true;
         int menuSelection = 0;
+        try {
         while (keepGoing) {
             
             menuSelection = getMenuSelection();
@@ -65,33 +67,36 @@ public class AppMembershipController {
             }
         }
         exitMessage();
+        } catch (AppMembershipDaoException e) {
+            view.displayErrorMessage(e.getMessage());
+        }
     }
     
     private int getMenuSelection() {
         return view.printMenuAndGetSelection();
     }
     
-    private void createMember() {
+    private void createMember() throws AppMembershipDaoException {
         view.displayCreateMemberBanner();
         Member newMember = view.getNewMemberInfo();
         dao.addMember(newMember.getMemberId(), newMember);
         view.displayCreateSuccessBanner();
     }
     
-    private void listMembers() {
+    private void listMembers() throws AppMembershipDaoException {
         view.displayShowAllMembersBanner();
         List<Member> memberList = dao.getAllMembers();
         view.displayMemberList(memberList);
     }
     
-    private void viewMember() {
+    private void viewMember() throws AppMembershipDaoException {
         view.displayDisplayMemberBanner();
         String memberId = view.getMemberIdChoice();
         Member member = dao.getMember(memberId);
         view.displayMember(member);
     }
     
-    private void removeMember() {
+    private void removeMember() throws AppMembershipDaoException {
         view.displayRemoveMemberBanner();
         String memberId = view.getMemberIdChoice();
         dao.removeMember(memberId);
